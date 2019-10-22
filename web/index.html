@@ -3,19 +3,37 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <base href="http://localhost:5000/"/>
   <title>{{data.message}} - Web Engineering</title>
+  <style>
+  .song_list{
+  	list-style: none;
+  	background-color: #20a0fa;
+  	padding: 2em;
+  }
+
+  .song_list li{
+  	background-color: #1889e6;
+  	margin: 0.5em;
+  	padding: 0.5em;
+  }
+
+  </style>
 </head>
 
 <body>
 	<nav>
-		<li>Home</li>
-		<li>Artists</li>
-		<li>Songs</li>
+		<li><a href="/">Home</a></li>
+		<li><a href="/artists">api: Artists</a></li>
+		<li><a href="/songs">api: Songs</a></li>
 	</nav>
 	<div id="app_root">
-		<ul>
+		<h1>Songs</h1>
+		<ul class="song_list">
 			<li v-for="song in songs">
-				{{ song }}
+				<strong><a :href="song.links.self.href">{{ song.title }}</a></strong>
+				<sub> by <a :href="song.links.artist.href">{{ song.artist_name }}</a></sub>
+  				<p>Duration: {{ formatted_time(song.duration) }}</p>
 			</li>
 		</ul>
 	</div>
@@ -24,19 +42,43 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
   	var app = new Vue({
-	  el: '#app_root',
-	  data: {
-	    songs: ['Present tense',
-	    		'No harm',
-	    		'Croche']
+		el: '#app_root',
+		data: {
+			songs: []
+		},
+		methods: {
+			// a computed getter
+			formatted_time: function (duration) {
+				// from https://stackoverflow.com/a/6313032
+				// multiply by 1000 because Date() requires miliseconds
+				var date = new Date(duration * 1000);
+
+				var m = date.getUTCMinutes();
+				var ss = date.getSeconds();
+
+				if (ss < 10) {ss = "0"+ss;}
+
+				return m+":"+ss;
+			    }
+			},
+		created () {
+			fetch("http://127.0.0.1:5000/songs")
+				// .then(console.log(response))
+				.then(response => response.json())
+				.then(json => {
+					console.log(json)
+					this.songs = json
+				})
+	  	// load_data();
 	  },
-	  created () {
-	  	fetch("http://127.0.0.1:5000/songs")
-	  		.then(response => response.json())
-	  		.then(json => {
-	  			this.songs = json.songs
-	  		})
-	  }
 	})
+
+
+	async function load_data(){
+	  	const response = await fetch('http://127.0.0.1:5000/songs');
+		const myJson = await response.json();
+		console.log(JSON.stringify(myJson));
+		app.data = myJson;
+	}
   </script>
 </html>
