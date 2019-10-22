@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{data.message}} - Web Engineering</title>
+</head>
+
+<body>
+	<nav>
+		<li>Home</li>
+		<li>Artists</li>
+		<li>Songs</li>
+	</nav>
+	<div id="app_root">
+		<ul>
+			<li v-for="song in songs">
+				{{ song }}
+			</li>
+		</ul>
+	</div>
+</body>
+	<!-- development version, includes helpful console warnings -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+  	var app = new Vue({
+	  el: '#app_root',
+	  data: {
+	    songs: ['Present tense',
+	    		'No harm',
+	    		'Croche']
+	  },
+	  created () {
+	  	fetch("http://127.0.0.1:5000/songs")
+	  		.then(response => response.json())
+	  		.then(json => {
+	  			this.songs = json.songs
+	  		})
+	  }
+	})
+  </script>
+</html>
