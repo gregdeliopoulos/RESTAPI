@@ -4,8 +4,11 @@
 <head>
   <meta charset="utf-8">
   <base href="http://localhost:5000/"/>
-  <title>{{data.message}} - Web Engineering</title>
+  <title>Web Engineering</title>
   <style>
+  .horizontal_list li{
+  	display:inline;
+  }
   .song_list{
   	list-style: none;
   	background-color: #20a0fa;
@@ -29,11 +32,20 @@
 	</nav>
 	<div id="app_root">
 		<h1>Songs</h1>
+		<ul>
+			<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_hotttnesss</button></li>
+			<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_duration&direction=asc</button></li>
+		</ul>
+
 		<ul class="song_list">
 			<li v-for="song in songs">
 				<strong><a :href="song.links.self.href">{{ song.title }}</a></strong>
 				<sub> by <a :href="song.links.artist.href">{{ song.artist_name }}</a></sub>
-  				<p>Duration: {{ formatted_time(song.duration) }}</p>
+  				
+  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
+  				<p>Song&#127777; {{ song.hotttnesss }}</p>
+  				<p>Released in {{ song.year }}</p>
+
 			</li>
 		</ul>
 	</div>
@@ -53,32 +65,46 @@
 				// multiply by 1000 because Date() requires miliseconds
 				var date = new Date(duration * 1000);
 
-				var m = date.getUTCMinutes();
+				var hh = date.getUTCHours();
+				var mm = date.getUTCMinutes();
 				var ss = date.getSeconds();
 
 				if (ss < 10) {ss = "0"+ss;}
 
-				return m+":"+ss;
-			    }
+				if(hh == 0 && mm == 0){
+					return "0:"+ss
+				} else {
+					if (hh == 0){
+						return mm+":"+ss
+					} else {
+						if (mm < 10) {mm = "0"+mm}
+						return hh+":"+mm+":"+ss
+					}
+				}
 			},
+
+			get_songs_sorted_by_duration: function() {
+				load_songs('http://127.0.0.1:5000/songs?order_by=song_duration&direction=asc');
+			},
+		},
 		created () {
-			fetch("http://127.0.0.1:5000/songs")
-				// .then(console.log(response))
-				.then(response => response.json())
-				.then(json => {
-					console.log(json)
-					this.songs = json
-				})
-	  	// load_data();
-	  },
+			load_songs("http://127.0.0.1:5000/songs");
+	  	},
 	})
 
-
-	async function load_data(){
-	  	const response = await fetch('http://127.0.0.1:5000/songs');
+	async function load_songs(url){
+		console.log("loading songs from " + htmlDecode(url))
+	  	const response = await fetch(htmlDecode(url));
 		const myJson = await response.json();
 		console.log(JSON.stringify(myJson));
-		app.data = myJson;
+		app.songs = myJson;
 	}
+
+	function htmlDecode(input){
+	  var e = document.createElement('div');
+	  e.innerHTML = input;
+	  return e.childNodes[0].nodeValue;
+	}
+	
   </script>
 </html>

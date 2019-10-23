@@ -35,17 +35,20 @@ def show_artists():
         cursor.execute("SELECT * FROM music LIMIT 1")
         columns = [desc[0] for desc in cursor.description]
 
+        # Ordering by given column and optionally given direction (default=descending)
         if order_by not in columns:
             return "Incorrect column name", 422
         else:
             ordering = f" ORDER BY cast({request.args.get('order_by')} as REAL)"
-            if request.args.get('sort'):
-                sorting = request.args.get('sort')
-                if sorting in {"asc", "ascending", "ASC", "ASCENDING"}:
+            if request.args.get('direction'):
+                direction = request.args.get('direction')
+                if direction in {"asc", "ascending", "ASC", "ASCENDING"}:
                     ordering += " ASC"
-                elif sorting in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
+                elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
-            elif True:  # Default option
+                else:
+                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending"
+            else:  # Default option
                 ordering += " DESC"
             options.append(ordering)
 
@@ -61,13 +64,12 @@ def show_artists():
     cursor.execute(query)
     rows = cursor.fetchall()
 
-    linked_artists = map(db.LinkedArtist.from_db_row, rows)
+    linked_artists = list(map(db.LinkedArtist.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(list(linked_artists)[:50])
-        # return jsonify(list(linked_artists)[:50], sort_keys=False)
+        return jsonify(linked_artists[:50])
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedArtist, list(linked_artists)[:50])
+        return create_csv_response(db.LinkedArtist, linked_artists[:50])
 
 
 @app.route('/artists/<string:artist_id>', methods=["GET"])
@@ -86,12 +88,12 @@ def show_artist(artist_id):
     cursor.execute(query)
     rows = cursor.fetchall()
 
-    linked_artists = map(db.LinkedArtist.from_db_row, rows)
+    linked_artists = list(map(db.LinkedArtist.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(list(linked_artists)[:50])
+        return jsonify(linked_artists[:50])
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedArtist, list(linked_artists)[:50])
+        return create_csv_response(db.LinkedArtist, linked_artists[:50])
 
 
 @app.route('/artists/<string:artist_id>/songs', methods=["GET"])
@@ -115,12 +117,12 @@ def show_artist_songs(artist_id):
     cursor.execute(query)
     rows = cursor.fetchall()
 
-    linked_songs = map(db.LinkedSong.from_db_row, rows)
+    linked_songs = list(map(db.LinkedSong.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(list(linked_songs)[:50])
+        return jsonify(linked_songs[:50])
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedSong, list(linked_songs)[:50])
+        return create_csv_response(db.LinkedSong, linked_songs[:50])
 
 
 @app.route('/songs', methods=["GET"])
@@ -149,17 +151,20 @@ def show_songs():
         cursor.execute("SELECT * FROM music LIMIT 1")
         columns = [desc[0] for desc in cursor.description]
 
+        # Ordering by given column and optionally given direction (default=descending)
         if order_by not in columns:
             return "Incorrect column name", 422
         else:
             ordering = f" ORDER BY cast({request.args.get('order_by')} as REAL)"
-            if request.args.get('sort'):
-                sorting = request.args.get('sort')
-                if sorting in {"asc", "ascending", "ASC", "ASCENDING"}:
+            if request.args.get('direction'):
+                direction = request.args.get('direction')
+                if direction in {"asc", "ascending", "ASC", "ASCENDING"}:
                     ordering += " ASC"
-                elif sorting in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
+                elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
-            elif True:  # Default option
+                else:
+                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending"
+            else:  # Default option
                 ordering += " DESC"
             options.append(ordering)
 
@@ -177,12 +182,12 @@ def show_songs():
     rows = cursor.fetchall()
 
     # TODO Add links to releases/songs
-    linked_songs = map(db.LinkedSong.from_db_row, rows)
+    linked_songs = list(map(db.LinkedSong.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(list(linked_songs)[:50])
+        return jsonify(linked_songs[:50])
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedSong, list(linked_songs)[:50])
+        return create_csv_response(db.LinkedSong, linked_songs[:50])
 
 
 @app.route('/songs/<string:song_id>', methods=["GET"])
@@ -194,12 +199,12 @@ def show_song(song_id):
     cursor.execute(query)
     rows = cursor.fetchall()
 
-    songs = map(db.LinkedSong.from_db_row, rows)
+    songs = list(map(db.LinkedSong.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(list(songs))
+        return jsonify(songs)
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedSong, list(songs))
+        return create_csv_response(db.LinkedSong, songs)
 
 
 # TODO Deal with linking
@@ -222,10 +227,11 @@ def create_csv_response(instance_type, instances):
 # from https://stackoverflow.com/a/42286498
 @app.after_request
 def after_request(response):
-  response.headers.add('Access-Control-Allow-Origin', '*')
-  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  return response
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
 
 if __name__ == '__main__':
     app.run()
