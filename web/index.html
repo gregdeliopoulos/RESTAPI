@@ -5,36 +5,21 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
 		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="css/style.css"  media="screen,projection"/>
 
 		<!--Let browser know website is optimized for mobile-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 		<meta charset="utf-8">
-		<base href="http://localhost:5000/"/>
+		<!-- <base href="http://localhost:5000/"/> -->
 		<title>Web Engineering</title>
 	  <style>
-	  .horizontal_list li{
-	  	display:inline;
-	  }
-	  .song_list{
-	  	list-style: none;
-	  	background-color: #c7f2ff;
-	  	padding: 2em;
-	  }
-
-	  .song_list li{
-	  	background-color: #def5fc;
-	  	margin: 0.5em;
-	  	padding: 0.5em !important;
-	  }
-
 	  </style>
 	</head>
 
 	<body>
 		<nav>
 			    <div class="nav-wrapper">
-			      <!-- <a href="#" class="brand-logo">Logo</a> -->
 			      <ul id="nav" class="right">
 					<li><a href="/">api: home</a></li>
 					<li><a href="/artists">api: Artists</a></li>
@@ -47,15 +32,29 @@
 		<div id="app_root">
 			<h1>Songs</h1>
 			<ul>
+
 				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_hotttnesss</button></li>
 				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_duration&direction=desc</button></li>
 
 				<li>
-					http://127.0.0.1:5000/songs
-					<div class="input-field inline">
-						<input id="url_text_input" type="text" onchange="load_songs('/songs' + this.value)">
-						<span class="helper-text" data-error="wrong" data-success="right"></span>
-					</div>
+					<table class="tg">
+					  <tr>
+					    <th class="tg-0lax">path</th>
+					    <th class="tg-0lax">year=</th>
+					    <th class="tg-0lax">artist_id=</th>
+					    <th class="tg-0lax">order_by=</th>
+					    <th class="tg-0lax">direction=</th>
+					    <th class="tg-0lax">count=</th>
+					  </tr>
+					  <tr>
+					    <td class="tg-0lax">http://localhost:5000/songs?</td>
+					    <td class="tg-0lax"><input type="text" id="year" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+					    <td class="tg-0lax"><input type="text" id="artist_id" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+					    <td class="tg-0lax"><input type="text" id="order_by" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+					    <td class="tg-0lax"><input type="text" id="direction" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+					    <td class="tg-0lax"><input type="text" id="count" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+					  </tr>
+					</table>
 				</li>
 			</ul>
 
@@ -74,78 +73,8 @@
 	</body>
 
 	<!--JavaScript at end of body for optimized loading-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     	<!-- development version, includes helpful console warnings -->
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-  	var app = new Vue({
-		el: '#app_root',
-		data: {
-			songs: []
-		},
-		methods: {
-			// a computed getter
-			formatted_time: function (duration) {
-				// from https://stackoverflow.com/a/6313032
-				// multiply by 1000 because Date() requires miliseconds
-				var date = new Date(duration * 1000);
-
-				var hh = date.getUTCHours();
-				var mm = date.getUTCMinutes();
-				var ss = date.getSeconds();
-
-				if (ss < 10) {ss = "0"+ss;}
-
-				if(hh == 0 && mm == 0){
-					return "0:"+ss
-				} else {
-					if (hh == 0){
-						return mm+":"+ss
-					} else {
-						if (mm < 10) {mm = "0"+mm}
-						return hh+":"+mm+":"+ss
-					}
-				}
-			},
-
-			get_songs_sorted_by_duration: function() {
-				load_songs('http://127.0.0.1:5000/songs?order_by=song_duration&direction=asc');
-			},
-		},
-		created () {
-			load_songs("http://127.0.0.1:5000/songs");
-	  	},
-	})
-
-	function handleErrors(response) {
-    if (!response.ok) {
-    	try{
-    		throw Error(res.text())
-    	} catch(err) {
-	       console.log('caught it!',err);
-	    }
-
-    	// console.log(response.text);
-    	// M.toast({html: response.text});
-        // throw Error(response.statusText);
-    }
-    return response;
-}
-
-	async function load_songs(url){
-		console.log("loading songs from " + htmlDecode(url))
-	  	const response = await fetch(htmlDecode(url));
-	  	const handled_response = await handleErrors(response);
-		const myJson = await handled_response.json();
-		console.log(JSON.stringify(myJson));
-		app.songs = myJson;
-	}
-
-	function htmlDecode(input){
-	  var e = document.createElement('div');
-	  e.innerHTML = input;
-	  return e.childNodes[0].nodeValue;
-	}
-	
-  </script>
+	<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script type="application/javascript" src="js/script.js"></script>
 </html>

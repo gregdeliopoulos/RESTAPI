@@ -4,6 +4,7 @@ import io
 
 from flask import Flask, jsonify, request, make_response
 import db
+from exception import InvalidUsage
 
 app = Flask(__name__)
 
@@ -37,7 +38,8 @@ def show_artists():
 
         # Ordering by given column and optionally given direction (default=descending)
         if order_by not in columns:
-            return "Incorrect column name", 422
+            raise InvalidUsage(f"Incorrect column name: '{str(order_by)}'. Check payload for viable column names",
+                               status_code=422, payload={"columns": columns})
         else:
             ordering = f" ORDER BY cast({request.args.get('order_by')} as REAL)"
             if request.args.get('direction'):
@@ -47,7 +49,9 @@ def show_artists():
                 elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
                 else:
-                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending", 422
+                    raise InvalidUsage(
+                        f"Undefined direction: '{direction}'. Check payload for viable directions",
+                        status_code=422, payload={"directions": directions})
             else:  # Default option
                 ordering += " DESC"
             options.append(ordering)
@@ -140,6 +144,11 @@ def show_songs():
     filters = []
     options = []
     if request.args.get('year'):
+        try:
+            year = int(request.args.get('year'))
+        except ValueError:
+            raise InvalidUsage(f"Value for paremeter 'year' is not an integer: '{request.args.get('year')}'",
+                               status_code=422)
         filters.append(f"song_year = '{request.args.get('year')}'")
     if request.args.get('artist_id'):
         filters.append(f"artist_id = '{request.args.get('artist_id')}'")
@@ -153,7 +162,8 @@ def show_songs():
 
         # Ordering by given column and optionally given direction (default=descending)
         if order_by not in columns:
-            return "Incorrect column name", 422
+            raise InvalidUsage(f"Incorrect column name: '{str(order_by)}'. Check payload for viable column names",
+                               status_code=422, payload={"columns": columns})
         else:
             ordering = f" ORDER BY cast({request.args.get('order_by')} as REAL)"
             if request.args.get('direction'):
@@ -163,13 +173,17 @@ def show_songs():
                 elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
                 else:
-                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending"
+                    directions = {"asc", "ascending", "ASC", "ASCENDING", "dsc", "desc", "descending", "DSC", "DESC",
+                                  "DESCENDING"}
+                    raise InvalidUsage(
+                        f"Undefined direction: '{direction}'. Check payload for viable directions",
+                        status_code=422, payload={"directions": directions})
             else:  # Default option
                 ordering += " DESC"
             options.append(ordering)
 
     if request.args.get('count'):
-        options.append(f"LIMIT {request.args.get('count')}")
+        options.append(f" LIMIT {request.args.get('count')}")
 
     filters_string = " AND ".join(filters)
     if filters_string != "":
@@ -230,6 +244,14 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    return response
+
+
+# from https://flask.palletsprojects.com/en/1.1.x/patterns/apierrors/
+@app.errorhandler(InvalidUsage)
+def handle_invalid_usage(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code
     return response
 
 

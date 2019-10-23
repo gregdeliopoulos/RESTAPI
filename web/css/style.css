@@ -1,0 +1,14 @@
+.horizontal_list li{
+	display:inline;
+}
+.song_list{
+	list-style: none;
+	background-color: #c7f2ff;
+	padding: 2em;
+}
+
+.song_list li{
+	background-color: #def5fc;
+	margin: 0.5em;
+	padding: 0.5em !important;
+}
