@@ -237,7 +237,30 @@ def create_csv_response(instance_type, instances):
     return response
 
 
-# DEBUG
+@app.route('/songs', methods=["POST"])
+def create_songs():
+    # Check if database is empty
+    conn = db.get_connection()
+    cursor = conn.cursor()
+
+    query = f"SELECT * FROM music"
+    cursor.execute(query)
+    row = cursor.fetchone()
+    if row is not None:
+        #Database is not empty
+        raise InvalidUsage(f"Resource already exists. Try \"PUT\" or \"DELETE\"", status_code=409,)
+
+    # Verify payload
+    payload_json = request.json
+    song_list = list(map(db.Song.from_json_dict, payload_json))
+
+    # Database is empty, so can insert without checking for song_id collisions
+    db.add_songs(song_list)
+
+    return "Created", 201
+
+
+# Ignoring some safety concerns
 # from https://stackoverflow.com/a/42286498
 @app.after_request
 def after_request(response):

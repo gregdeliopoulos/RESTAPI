@@ -1,3 +1,4 @@
+import dataclasses
 import sqlite3
 from dataclasses import dataclass
 
@@ -129,6 +130,10 @@ class Song:
         args = list([row[2]] + [row[6]] + [row[10]]) + list(row[12:35])
         return cls(*args)
 
+    @classmethod
+    def from_json_dict(cls, dict: str) -> 'Song':
+        return cls(**dict)
+
     def __iter__(self):
         return iter([self.artist_id,
                      self.artist_name,
@@ -166,7 +171,7 @@ class LinkedSong(Song):
     def from_song(cls, song) -> 'LinkedSong':
         links = cls.create_song_links(song)
 
-        return cls(*tuple(song), links)
+        return cls(*song, links)
 
     @classmethod
     def from_db_row(cls, row) -> 'LinkedSong':
@@ -210,47 +215,47 @@ class LinkedSong(Song):
 #         return cls(artist, release, song)
 
 
-# @dataclass
-# class SongRow:
-#     artist_familiarity: float
-#     artist_hotttnesss: float
-#     artist_id: str
-#     artist_latitude: float
-#     artist_location: int
-#     artist_longitude: float
-#     artist_name: str
-#     artist_similar: float
-#     artist_terms: str
-#     artist_terms_freq: float
-#     release_id: int
-#     release_name: int
-#     song_artist_mbtags: float
-#     song_artist_mbtags_count: float
-#     song_bars_confidence: float
-#     song_bars_start: float
-#     song_beats_confidence: float
-#     song_beats_start: float
-#     song_duration: float
-#     song_end_of_fade_in: float
-#     song_hotttnesss: float
-#     song_id: str
-#     song_key: float
-#     song_key_confidence: float
-#     song_loudness: float
-#     song_mode: int
-#     song_mode_confidence: float
-#     song_start_of_fade_out: float
-#     song_tatums_confidence: float
-#     song_tatums_start: float
-#     song_tempo: float
-#     song_time_signature: float
-#     song_time_signature_confidence: float
-#     song_title: int
-#     song_year: int
-#
-#     @classmethod
-#     def from_db_row(cls, row: str) -> 'SongRow':
-#         return cls(*row)
+@dataclass
+class SongRow:
+    artist_familiarity: float
+    artist_hotttnesss: float
+    artist_id: str
+    artist_latitude: float
+    artist_location: int
+    artist_longitude: float
+    artist_name: str
+    artist_similar: float
+    artist_terms: str
+    artist_terms_freq: float
+    release_id: int
+    release_name: int
+    song_artist_mbtags: float
+    song_artist_mbtags_count: float
+    song_bars_confidence: float
+    song_bars_start: float
+    song_beats_confidence: float
+    song_beats_start: float
+    song_duration: float
+    song_end_of_fade_in: float
+    song_hotttnesss: float
+    song_id: str
+    song_key: float
+    song_key_confidence: float
+    song_loudness: float
+    song_mode: int
+    song_mode_confidence: float
+    song_start_of_fade_out: float
+    song_tatums_confidence: float
+    song_tatums_start: float
+    song_tempo: float
+    song_time_signature: float
+    song_time_signature_confidence: float
+    song_title: int
+    song_year: int
+
+    @classmethod
+    def from_db_row(cls, row: str) -> 'SongRow':
+        return cls(*row)
 
 
 def get_connection():
@@ -264,17 +269,47 @@ def dict_factory(cursor, row):
     return d
 
 
+# TODO Should be general ADD_ROW, use keys to populate a SongRow instance, leave other fields empty, and then insert/update row
+def add_songs(songs):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    #Get field names
+    field_names = [field.name for field in dataclasses.fields(Song)]
+
+    #prepend field prefixes
+    prefixed_names = []
+    for field_name in field_names:
+        if field_name not in ["artist_id", "artist_name", "release_id"]:
+            prefixed_names.append("song_" + field_name)
+        else:
+            prefixed_names.append(field_name)
+    # field_names = ["song_" + field_name for field_name in field_names if field_name not in {"artist_id", "artist_name", "release_id"}]
+
+    query = f"INSERT INTO music(" + ",".join(prefixed_names) + ") VALUES(" + ",".join(["?" for _ in prefixed_names]) + ")"
+    print(query)
+    # cursor.executemany(query, songs)
+
+    #lose unprefixed key names
+    raw_song_values = list(map(tuple, songs))
+    # cursor.execute(query, tuple(songs))
+    cursor.executemany(query, raw_song_values)
+    conn.commit()
+    conn.close()
+
 if __name__ == "__main__":
     conn = get_connection()
 
     conn.row_factory = dict_factory
     cursor = conn.cursor()
+    # cursor.execute("DELETE FROM music")
     cursor.execute("SELECT * FROM music")
-    for idx, col in enumerate(cursor.description):
-        print(idx, col)
-
+    # for idx, col in enumerate(cursor.description):
+    #     print(idx, col)
+    #
     for row in cursor.fetchall():
-        # print(str(row))
         print(json.dumps(row))
+        # print(str(row))
 
+    conn.commit()
     conn.close()
