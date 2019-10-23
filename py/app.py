@@ -47,7 +47,7 @@ def show_artists():
                 elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
                 else:
-                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending"
+                    return f"Undefined sorting: {direction}. Provide one of <pre>\"asc\", \"ascending\", \"ASC\", \"ASCENDING\"</pre> for ascending, or one of <pre>\"dsc\", \"desc\", \"descending\", \"DSC\", \"DESC\", \"DESCENDING\"</pre> for descending", 422
             else:  # Default option
                 ordering += " DESC"
             options.append(ordering)

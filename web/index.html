@@ -1,56 +1,81 @@
 <!doctype html>
-
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <base href="http://localhost:5000/"/>
-  <title>Web Engineering</title>
-  <style>
-  .horizontal_list li{
-  	display:inline;
-  }
-  .song_list{
-  	list-style: none;
-  	background-color: #20a0fa;
-  	padding: 2em;
-  }
+	<head>
+		  <!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-  .song_list li{
-  	background-color: #1889e6;
-  	margin: 0.5em;
-  	padding: 0.5em;
-  }
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  </style>
-</head>
+		<meta charset="utf-8">
+		<base href="http://localhost:5000/"/>
+		<title>Web Engineering</title>
+	  <style>
+	  .horizontal_list li{
+	  	display:inline;
+	  }
+	  .song_list{
+	  	list-style: none;
+	  	background-color: #c7f2ff;
+	  	padding: 2em;
+	  }
 
-<body>
-	<nav>
-		<li><a href="/">Home</a></li>
-		<li><a href="/artists">api: Artists</a></li>
-		<li><a href="/songs">api: Songs</a></li>
-	</nav>
-	<div id="app_root">
-		<h1>Songs</h1>
-		<ul>
-			<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_hotttnesss</button></li>
-			<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_duration&direction=asc</button></li>
-		</ul>
+	  .song_list li{
+	  	background-color: #def5fc;
+	  	margin: 0.5em;
+	  	padding: 0.5em !important;
+	  }
 
-		<ul class="song_list">
-			<li v-for="song in songs">
-				<strong><a :href="song.links.self.href">{{ song.title }}</a></strong>
-				<sub> by <a :href="song.links.artist.href">{{ song.artist_name }}</a></sub>
-  				
-  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
-  				<p>Song&#127777; {{ song.hotttnesss }}</p>
-  				<p>Released in {{ song.year }}</p>
+	  </style>
+	</head>
 
-			</li>
-		</ul>
-	</div>
-</body>
-	<!-- development version, includes helpful console warnings -->
+	<body>
+		<nav>
+			    <div class="nav-wrapper">
+			      <!-- <a href="#" class="brand-logo">Logo</a> -->
+			      <ul id="nav" class="right">
+					<li><a href="/">api: home</a></li>
+					<li><a href="/artists">api: Artists</a></li>
+					<li><a href="/songs">api: Songs</a></li>
+			      </ul>
+			    </div>
+		</nav>
+
+
+		<div id="app_root">
+			<h1>Songs</h1>
+			<ul>
+				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_hotttnesss</button></li>
+				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_duration&direction=desc</button></li>
+
+				<li>
+					http://127.0.0.1:5000/songs
+					<div class="input-field inline">
+						<input id="url_text_input" type="text" onchange="load_songs('/songs' + this.value)">
+						<span class="helper-text" data-error="wrong" data-success="right"></span>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="song_list">
+				<li v-for="song in songs">
+					<strong><a :href="encodeURI(song.links.self.href)">{{ song.title }}</a></strong>
+					<sub> by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a></sub>
+	  				
+	  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
+	  				<p>Song&#127777; {{ song.hotttnesss }}</p>
+	  				<p>Released in {{ song.year }}</p>
+
+				</li>
+			</ul>
+		</div>
+	</body>
+
+	<!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    	<!-- development version, includes helpful console warnings -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
   	var app = new Vue({
@@ -92,10 +117,26 @@
 	  	},
 	})
 
+	function handleErrors(response) {
+    if (!response.ok) {
+    	try{
+    		throw Error(res.text())
+    	} catch(err) {
+	       console.log('caught it!',err);
+	    }
+
+    	// console.log(response.text);
+    	// M.toast({html: response.text});
+        // throw Error(response.statusText);
+    }
+    return response;
+}
+
 	async function load_songs(url){
 		console.log("loading songs from " + htmlDecode(url))
 	  	const response = await fetch(htmlDecode(url));
-		const myJson = await response.json();
+	  	const handled_response = await handleErrors(response);
+		const myJson = await handled_response.json();
 		console.log(JSON.stringify(myJson));
 		app.songs = myJson;
 	}

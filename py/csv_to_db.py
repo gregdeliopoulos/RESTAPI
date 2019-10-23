@@ -2,7 +2,7 @@ import sqlite3
 import csv
 
 
-class csvReader(object):
+class CsvReader(object):
     def csvFile(self):
         self.readFile('music.csv')
 
@@ -60,4 +60,4 @@ class csvReader(object):
 
 if __name__ == "__main__":
     csv_path = "/music.csv"
-    c = csvReader().csvFile()
+    c = CsvReader().csvFile()
