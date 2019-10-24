@@ -1,4 +1,3 @@
-
 var app = new Vue({
 	el: '#app_root',
 	data: {
@@ -34,9 +33,15 @@ var app = new Vue({
 		},
 	},
 	created () {
-		load_songs("http://127.0.0.1:5000/songs");
-  	},
+		// load_songs("http://127.0.0.1:5000/songs");
+		load_songs_from_inputs();
+	}
 })
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {accordion: false});
+  });
 
 function handleErrors(response) {
 if (!response.ok) {
@@ -83,6 +88,9 @@ function load_songs_from_inputs(){
 	}
 	if(document.getElementById("order_by").value != ''){
 		params.push("order_by=" + document.getElementById("order_by").value);
+	}
+	if(document.getElementById("treshold").value != ''){
+		params.push("treshold=" + document.getElementById("treshold").value);
 	}
 	if(document.getElementById("direction").value != ''){
 		params.push("direction=" + document.getElementById("direction").value);

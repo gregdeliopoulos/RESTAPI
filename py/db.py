@@ -1,4 +1,6 @@
 import dataclasses
+import datetime
+import shutil
 import sqlite3
 from dataclasses import dataclass
 
@@ -330,6 +332,18 @@ def put_songs(songs):
     add_songs(new_songs)
 
 
+def delete_songs():
+    # First archive database (just 2mb anyway)
+    new_name = datetime.datetime.now().strftime('%Y-%m-%d--%H-%M-%S')
+    print(new_name)
+    shutil.copy2("music_data.db", f"archive/music_data_{new_name}.db")
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM music")
+    conn.commit()
+    conn.close()
+    return True
 
 if __name__ == "__main__":
     conn = get_connection()
@@ -347,3 +361,4 @@ if __name__ == "__main__":
 
     conn.commit()
     conn.close()
+

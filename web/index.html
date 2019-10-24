@@ -30,45 +30,60 @@
 
 
 		<div id="app_root">
-			<h1>Songs</h1>
-			<ul>
+			<!-- Best SPA ever -->
+			  <ul class="collapsible">
 
-				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_hotttnesss</button></li>
-				<li><button onClick="load_songs(this.innerHTML);">http://127.0.0.1:5000/songs?order_by=song_duration&direction=desc</button></li>
+			    <li>
+			      <div class="collapsible-header">
+			      	<a class="waves-effect waves-teal btn-flat">GET</a>
+			      	Songs
+			  	  </div>
+			      <div class="collapsible-body">
 
-				<li>
-					<table class="tg">
-					  <tr>
-					    <th class="tg-0lax">path</th>
-					    <th class="tg-0lax">year=</th>
-					    <th class="tg-0lax">artist_id=</th>
-					    <th class="tg-0lax">order_by=</th>
-					    <th class="tg-0lax">direction=</th>
-					    <th class="tg-0lax">count=</th>
-					  </tr>
-					  <tr>
-					    <td class="tg-0lax">http://localhost:5000/songs?</td>
-					    <td class="tg-0lax"><input type="text" id="year" class="browser-default" onchange="load_songs_from_inputs()"/></td>
-					    <td class="tg-0lax"><input type="text" id="artist_id" class="browser-default" onchange="load_songs_from_inputs()"/></td>
-					    <td class="tg-0lax"><input type="text" id="order_by" class="browser-default" onchange="load_songs_from_inputs()"/></td>
-					    <td class="tg-0lax"><input type="text" id="direction" class="browser-default" onchange="load_songs_from_inputs()"/></td>
-					    <td class="tg-0lax"><input type="text" id="count" class="browser-default" onchange="load_songs_from_inputs()"/></td>
-					  </tr>
-					</table>
-				</li>
-			</ul>
+				<ul>
+					<li>
+						<table class="tg">
+						  <tr>
+						    <th class="tg-0lax">path</th>
+						    <th class="tg-0lax">year=</th>
+						    <th class="tg-0lax">artist_id=</th>
+						    <th class="tg-0lax">order_by=</th>
+						    <th class="tg-0lax">treshold=</th>
+						    <th class="tg-0lax">direction=</th>
+						    <th class="tg-0lax">count=</th>
+						  </tr>
+						  <tr>
+						    <td class="tg-0lax">http://localhost:5000/songs?</td>
+						    <td class="tg-0lax"><input type="text" id="year" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						    <td class="tg-0lax"><input type="text" id="artist_id" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						    <td class="tg-0lax"><input type="text" id="order_by" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						    <td class="tg-0lax"><input type="text" id="treshold" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						    <td class="tg-0lax"><input type="text" id="direction" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						    <td class="tg-0lax"><input type="text" id="count" value="20" class="browser-default" onchange="load_songs_from_inputs()"/></td>
+						  </tr>
+						</table>
+					</li>
+				</ul>
 
-			<ul class="song_list">
-				<li v-for="song in songs">
-					<strong><a :href="encodeURI(song.links.self.href)">{{ song.title }}</a></strong>
-					by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a>
-	  				
-	  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
-	  				<p>Song&#127777; {{ song.hotttnesss }}</p>
-	  				<p>Released in {{ song.year }}</p>
+				<ul class="song_list">
+					<li v-for="song in songs">
+						<strong><a :href="encodeURI(song.links.self.href)">{{ song.title }}</a></strong>
+						by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a>
+		  				
+		  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
+		  				<p>Song&#127777; {{ song.hotttnesss }}</p>
+		  				<p>Released in {{ song.year }}</p>
 
-				</li>
-			</ul>
+					</li>
+				</ul>
+
+			      </div>
+			    </li>
+			    <li>
+			      <div class="collapsible-header"><i class="material-icons">Releases</i>Third</div>
+			      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			    </li>
+			  </ul>
 		</div>
 	</body>
 
