@@ -297,6 +297,40 @@ def add_songs(songs):
     conn.commit()
     conn.close()
 
+
+def is_in_database(song):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = f"SELECT * FROM music WHERE song_id = '{song.id}'"
+    cursor.execute(query)
+    row = cursor.fetchone()
+
+    return row is not None
+
+
+# Will update songs that are already present in the database (based on song_id), and add ones that are not yet present
+def put_songs(songs):
+    existing_songs = [song for song in songs if is_in_database(song)]
+    new_songs = [song for song in songs if not is_in_database(song)]
+
+
+    conn = get_connection()
+    cursor = conn.cursor()
+    # Update by deleting rows and inserting new ones (This does require full new data for updating a song row, but that is expected when bulk updating songs)
+    for song in existing_songs:
+        query = f"DELETE FROM music where song_id = '{song.id}'"
+        cursor.execute(query)
+    conn.commit()
+    conn.close()
+
+
+    # Add all songs
+    add_songs(existing_songs)
+    add_songs(new_songs)
+
+
+
 if __name__ == "__main__":
     conn = get_connection()
 

@@ -61,7 +61,7 @@
 			<ul class="song_list">
 				<li v-for="song in songs">
 					<strong><a :href="encodeURI(song.links.self.href)">{{ song.title }}</a></strong>
-					<sub> by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a></sub>
+					by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a>
 	  				
 	  				<p>&#9202; {{ formatted_time(song.duration) }}</p>
 	  				<p>Song&#127777; {{ song.hotttnesss }}</p>

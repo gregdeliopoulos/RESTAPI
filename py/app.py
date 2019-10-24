@@ -49,6 +49,8 @@ def show_artists():
                 elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
                 else:
+                    directions = {"asc", "ascending", "ASC", "ASCENDING", "dsc", "desc", "descending", "DSC", "DESC",
+                                  "DESCENDING"}
                     raise InvalidUsage(
                         f"Undefined direction: '{direction}'. Check payload for viable directions",
                         status_code=422, payload={"directions": directions})
@@ -71,9 +73,9 @@ def show_artists():
     linked_artists = list(map(db.LinkedArtist.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(linked_artists[:50])
+        return jsonify(linked_artists)
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedArtist, linked_artists[:50])
+        return create_csv_response(db.LinkedArtist, linked_artists)
 
 
 @app.route('/artists/<string:artist_id>', methods=["GET"])
@@ -95,9 +97,9 @@ def show_artist(artist_id):
     linked_artists = list(map(db.LinkedArtist.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(linked_artists[:50])
+        return jsonify(linked_artists)
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedArtist, linked_artists[:50])
+        return create_csv_response(db.LinkedArtist, linked_artists)
 
 
 @app.route('/artists/<string:artist_id>/songs', methods=["GET"])
@@ -124,9 +126,9 @@ def show_artist_songs(artist_id):
     linked_songs = list(map(db.LinkedSong.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(linked_songs[:50])
+        return jsonify(linked_songs)
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedSong, linked_songs[:50])
+        return create_csv_response(db.LinkedSong, linked_songs)
 
 
 @app.route('/songs', methods=["GET"])
@@ -199,9 +201,9 @@ def show_songs():
     linked_songs = list(map(db.LinkedSong.from_db_row, rows))
 
     if request.content_type in {"application/json", None}:
-        return jsonify(linked_songs[:50])
+        return jsonify(linked_songs)
     elif request.content_type == "text/csv":
-        return create_csv_response(db.LinkedSong, linked_songs[:50])
+        return create_csv_response(db.LinkedSong, linked_songs)
 
 
 @app.route('/songs/<string:song_id>', methods=["GET"])
@@ -237,27 +239,65 @@ def create_csv_response(instance_type, instances):
     return response
 
 
+# Start song collection with supplied set of songs
 @app.route('/songs', methods=["POST"])
 def create_songs():
-    # Check if database is empty
     conn = db.get_connection()
     cursor = conn.cursor()
 
+    # For checking if database is empty
     query = f"SELECT * FROM music"
     cursor.execute(query)
     row = cursor.fetchone()
     if row is not None:
-        #Database is not empty
-        raise InvalidUsage(f"Resource already exists. Try \"PUT\" or \"DELETE\"", status_code=409,)
+        # Database is not empty
+        raise InvalidUsage(f"Resource already exists. Try \"PUT\" or \"DELETE\"", status_code=409)
 
     # Verify payload
-    payload_json = request.json
-    song_list = list(map(db.Song.from_json_dict, payload_json))
+    try:
+        payload_json = request.json
+    except:
+        raise InvalidUsage(f"Payload is not a valid json", status_code=409)
+
+    try:
+        song_list = list(map(db.Song.from_json_dict, payload_json))
+    except:
+        raise InvalidUsage(f"JSON can not be converted into valid song data. See payload for required columns", status_code=409, payload={"columns": dataclasses.fields(db.Song)})
 
     # Database is empty, so can insert without checking for song_id collisions
     db.add_songs(song_list)
 
-    return "Created", 201
+    return "Created collection at /songs", 201
+
+
+# Update song collection with supplied set of songs, overwriting existing rows where the song_id column collides
+@app.route('/songs', methods=["PUT"])
+def update_songs():
+    conn = db.get_connection()
+    cursor = conn.cursor()
+
+    # For checking if database is empty
+    query = f"SELECT * FROM music"
+    cursor.execute(query)
+    row = cursor.fetchone()
+    if row is None:
+        # Database is empty
+        raise InvalidUsage(f"Resource does not exists. Try \"CREATE\" instead", status_code=409)
+
+    # Verify payload
+    try:
+        payload_json = request.json
+    except:
+        raise InvalidUsage(f"Payload is not a valid json", status_code=409)
+
+    try:
+        song_list = list(map(db.Song.from_json_dict, payload_json))
+    except:
+        raise InvalidUsage(f"JSON can not be converted into valid song data. See payload for required columns", status_code=409, payload={"columns": dataclasses.fields(db.Song)})
+
+    # Bulk update songs (update existing and add new ones)
+    db.put_songs(song_list)
+
 
 
 # Ignoring some safety concerns
