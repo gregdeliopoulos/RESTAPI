@@ -31,6 +31,12 @@ var app = new Vue({
 		get_songs_sorted_by_duration: function() {
 			load_songs('http://127.0.0.1:5000/songs?order_by=song_duration&direction=asc');
 		},
+
+		hotness_color: function(hotness){
+			color =  "rgba(255, 0, 0, " + hotness + ")";
+			console.log(color)
+			return color;
+		},
 	},
 	created () {
 		// load_songs("http://127.0.0.1:5000/songs");
@@ -102,6 +108,8 @@ function load_songs_from_inputs(){
 	param_string = params.join("&");
 
 	url = [url, param_string].join("?");
+
+	M.toast({html: "fetching " + url})
 
 	load_songs(url);
 }

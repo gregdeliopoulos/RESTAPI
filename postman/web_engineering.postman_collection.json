@@ -1,0 +1,816 @@
+{
+	"info": {
+		"_postman_id": "b0b7fcb8-271f-41ae-b703-efbeb4b69e87",
+		"name": "web_engineering",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/songs",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/songs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs&year=1999",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs?year=1999",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "1999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs&year=1999 csv",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"type": "text",
+								"value": "text/csv"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs?year=1999",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "1999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs&artist_id=ARD7TVE1187B99BFB1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs?artist_id=ARD7TVE1187B99BFB1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "artist_id",
+									"value": "ARD7TVE1187B99BFB1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "1999"
+								},
+								{
+									"key": "order_by",
+									"value": "song_hotttnesss"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fbef33a0-507a-4508-b1ae-645f182bf1a1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c69963e-3580-4a88-8350-fa7487ac672c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/artists",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/artists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists application/json",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							]
+						},
+						"description": "application/json\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists text/csv",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/csv",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							]
+						},
+						"description": "application/json\n"
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists?name=key&genre=rock",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists?name=key&genre=rock",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "key"
+								},
+								{
+									"key": "genre",
+									"value": "rock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "order_by",
+									"value": "artist_hotttnesss"
+								},
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&genre=rock&count=2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "text/csv",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&genre=rock&count=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "order_by",
+									"value": "artist_hotttnesss"
+								},
+								{
+									"key": "genre",
+									"value": "rock"
+								},
+								{
+									"key": "count",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/artists/ARD7TVE1187B99BFB1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/artists/ARD7TVE1187B99BFB1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"artists",
+								"ARD7TVE1187B99BFB1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:5000/artists/ARD7TVE1187B99BFB1 csv",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/csv",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/artists/ARD7TVE1187B99BFB1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"artists",
+								"ARD7TVE1187B99BFB1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "/artists/:artist_id/songs",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs&song_year=2007",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs?song_year=2007",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists",
+								"ARM0P6Z1187FB4D466",
+								"songs"
+							],
+							"query": [
+								{
+									"key": "song_year",
+									"value": "2007"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs&genre=rock",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs?genre=rock",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists",
+								"ARM0P6Z1187FB4D466",
+								"songs"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "rock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"artists",
+								"ARM0P6Z1187FB4D466",
+								"songs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "cud",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/songs",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"ARMJAGH1187FB546F3\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"The Box Tops\",\r\n        \"bars_confidence\": 0.007,\r\n        \"bars_start\": 0.71054,\r\n        \"beats_confidence\": 1.0,\r\n        \"beats_start\": 0.20627,\r\n        \"duration\": 148.03546,\r\n        \"end_of_fade_in\": 0.148,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOCIWDW12A8C13D406\",\r\n        \"key\": 6.0,\r\n        \"key_confidence\": 0.169,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By The Box Tops\",\r\n                \"href\": \"/artists/ARMJAGH1187FB546F3\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARMJAGH1187FB546F3/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOCIWDW12A8C13D406\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -9.843,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.43,\r\n        \"release_id\": 300822,\r\n        \"start_of_fade_out\": 137.915,\r\n        \"tatums_confidence\": 0.969,\r\n        \"tatums_start\": 0.20627,\r\n        \"tempo\": 121.274,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.384,\r\n        \"title\": 0,\r\n        \"year\": 1969\r\n    },\r\n    {\r\n        \"artist_id\": \"ARKRRTF1187B9984DA\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Sonora Santanera\",\r\n        \"bars_confidence\": 0.98,\r\n        \"bars_start\": 0.73152,\r\n        \"beats_confidence\": 0.98,\r\n        \"beats_start\": 0.73152,\r\n        \"duration\": 177.47546,\r\n        \"end_of_fade_in\": 0.282,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOXVLOJ12AB0189215\",\r\n        \"key\": 8.0,\r\n        \"key_confidence\": 0.643,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Sonora Santanera\",\r\n                \"href\": \"/artists/ARKRRTF1187B9984DA\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARKRRTF1187B9984DA/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOXVLOJ12AB0189215\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -9.689,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.565,\r\n        \"release_id\": 514953,\r\n        \"start_of_fade_out\": 172.304,\r\n        \"tatums_confidence\": 0.482,\r\n        \"tatums_start\": 0.42132,\r\n        \"tempo\": 100.07,\r\n        \"time_signature\": 1.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"AR7G5I41187FB4CE6C\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"Adam Ant\",\r\n        \"bars_confidence\": 0.017,\r\n        \"bars_start\": 1.30621,\r\n        \"beats_confidence\": 0.809,\r\n        \"beats_start\": 0.81002,\r\n        \"duration\": 233.40363,\r\n        \"end_of_fade_in\": 0.0,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SONHOTT12A8C13493C\",\r\n        \"key\": 0.0,\r\n        \"key_confidence\": 0.751,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Adam Ant\",\r\n                \"href\": \"/artists/AR7G5I41187FB4CE6C\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/AR7G5I41187FB4CE6C/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SONHOTT12A8C13493C\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -9.013,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.749,\r\n        \"release_id\": 287650,\r\n        \"start_of_fade_out\": 217.124,\r\n        \"tatums_confidence\": 0.601,\r\n        \"tatums_start\": 0.56254,\r\n        \"tempo\": 119.293,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 1982\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 2236547748918.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"ARMJAGH1187FB546F3\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"The Box Tops\",\r\n        \"bars_confidence\": 0.007,\r\n        \"bars_start\": 0.71054,\r\n        \"beats_confidence\": 1.0,\r\n        \"beats_start\": 0.20627,\r\n        \"duration\": 148.03546,\r\n        \"end_of_fade_in\": 0.148,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOCIWDW12A8C13D406\",\r\n        \"key\": 6.0,\r\n        \"key_confidence\": 0.169,\r\n        \"loudness\": -9.843,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.43,\r\n        \"release_id\": 300822,\r\n        \"start_of_fade_out\": 137.915,\r\n        \"tatums_confidence\": 0.969,\r\n        \"tatums_start\": 0.20627,\r\n        \"tempo\": 121.274,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.384,\r\n        \"title\": 0,\r\n        \"year\": 1969\r\n    },\r\n    {\r\n        \"artist_id\": \"ARKRRTF1187B9984DA\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Sonora Santanera\",\r\n        \"bars_confidence\": 0.98,\r\n        \"bars_start\": 0.73152,\r\n        \"beats_confidence\": 0.98,\r\n        \"beats_start\": 0.73152,\r\n        \"duration\": 177.47546,\r\n        \"end_of_fade_in\": 0.282,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOXVLOJ12AB0189215\",\r\n        \"key\": 8.0,\r\n        \"key_confidence\": 0.643,\r\n        \"loudness\": -9.689,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.565,\r\n        \"release_id\": 514953,\r\n        \"start_of_fade_out\": 172.304,\r\n        \"tatums_confidence\": 0.482,\r\n        \"tatums_start\": 0.42132,\r\n        \"tempo\": 100.07,\r\n        \"time_signature\": 1.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"AR7G5I41187FB4CE6C\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"Adam Ant\",\r\n        \"bars_confidence\": 0.017,\r\n        \"bars_start\": 1.30621,\r\n        \"beats_confidence\": 0.809,\r\n        \"beats_start\": 0.81002,\r\n        \"duration\": 233.40363,\r\n        \"end_of_fade_in\": 0.0,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SONHOTT12A8C13493C\",\r\n        \"key\": 0.0,\r\n        \"key_confidence\": 0.751,\r\n        \"loudness\": -9.013,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.749,\r\n        \"release_id\": 287650,\r\n        \"start_of_fade_out\": 217.124,\r\n        \"tatums_confidence\": 0.601,\r\n        \"tatums_start\": 0.56254,\r\n        \"tempo\": 119.293,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 1982\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 2236547748918.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"ARMJAGH1187FB546F3\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"The Box Tops\",\r\n        \"bars_confidence\": 0.007,\r\n        \"bars_start\": 0.71054,\r\n        \"beats_confidence\": 1.0,\r\n        \"beats_start\": 0.20627,\r\n        \"duration\": 148.03546,\r\n        \"end_of_fade_in\": 0.148,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOCIWDW12A8C13D406\",\r\n        \"key\": 6.0,\r\n        \"key_confidence\": 0.169,\r\n        \"loudness\": -9.843,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.43,\r\n        \"release_id\": 300822,\r\n        \"start_of_fade_out\": 137.915,\r\n        \"tatums_confidence\": 0.969,\r\n        \"tatums_start\": 0.20627,\r\n        \"tempo\": 121.274,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.384,\r\n        \"title\": 0,\r\n        \"year\": 1969\r\n    },\r\n    {\r\n        \"artist_id\": \"ARKRRTF1187B9984DA\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Sonora Santanera\",\r\n        \"bars_confidence\": 0.98,\r\n        \"bars_start\": 0.73152,\r\n        \"beats_confidence\": 0.98,\r\n        \"beats_start\": 0.73152,\r\n        \"duration\": 177.47546,\r\n        \"end_of_fade_in\": 0.282,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SOXVLOJ12AB0189215\",\r\n        \"key\": 8.0,\r\n        \"key_confidence\": 0.643,\r\n        \"loudness\": -9.689,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.565,\r\n        \"release_id\": 514953,\r\n        \"start_of_fade_out\": 172.304,\r\n        \"tatums_confidence\": 0.482,\r\n        \"tatums_start\": 0.42132,\r\n        \"tempo\": 100.07,\r\n        \"time_signature\": 1.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    },\r\n    {\r\n        \"artist_id\": \"AR7G5I41187FB4CE6C\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 1.0,\r\n        \"artist_name\": \"Adam Ant\",\r\n        \"bars_confidence\": 0.017,\r\n        \"bars_start\": 1.30621,\r\n        \"beats_confidence\": 0.809,\r\n        \"beats_start\": 0.81002,\r\n        \"duration\": 233.40363,\r\n        \"end_of_fade_in\": 0.0,\r\n        \"hotttnesss\": -1.0,\r\n        \"id\": \"SONHOTT12A8C13493C\",\r\n        \"key\": 0.0,\r\n        \"key_confidence\": 0.751,\r\n        \"loudness\": -9.013,\r\n        \"mode\": 1,\r\n        \"mode_confidence\": 0.749,\r\n        \"release_id\": 287650,\r\n        \"start_of_fade_out\": 217.124,\r\n        \"tatums_confidence\": 0.601,\r\n        \"tatums_start\": 0.56254,\r\n        \"tempo\": 119.293,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.0,\r\n        \"title\": 0,\r\n        \"year\": 1982\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "cud /songs/:song_id",
+			"item": [
+				{
+					"name": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs",
+								"SOMZWCG12A8C13C480"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs",
+								"SELFMADESONG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SELFMADESONG\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs",
+								"SELFMADESONG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs",
+								"SELFMADESONG"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"songs",
+								"SELFMADESONG"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

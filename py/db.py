@@ -1,5 +1,6 @@
 import dataclasses
 import datetime
+import inspect
 import shutil
 import sqlite3
 from dataclasses import dataclass
@@ -41,6 +42,15 @@ class Artist:
 @dataclass
 class LinkedArtist(Artist):
     links: dict
+
+    def __eq__(self, other):
+        return other and self.id == other.id and self.name == other.name
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash((self.id, self.id))
 
     @classmethod
     def from_artist(cls, artist) -> 'LinkedArtist':
@@ -126,6 +136,13 @@ class Song:
     time_signature_confidence: float
     title: int
     year: int
+
+    @classmethod
+    def from_dict(cls, env):
+        return cls(**{
+            k: v for k, v in env.items()
+            if k in inspect.signature(cls).parameters
+        })
 
     @classmethod
     def from_db_row(cls, row: str) -> 'Song':
@@ -260,10 +277,6 @@ class SongRow:
         return cls(*row)
 
 
-def get_connection():
-    return sqlite3.connect('music_data.db')
-
-
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
@@ -300,11 +313,11 @@ def add_songs(songs):
     conn.close()
 
 
-def is_in_database(song):
+def is_in_database(song_id):
     conn = get_connection()
     cursor = conn.cursor()
 
-    query = f"SELECT * FROM music WHERE song_id = '{song.id}'"
+    query = f"SELECT * FROM music WHERE song_id = '{song_id}'"
     cursor.execute(query)
     row = cursor.fetchone()
 
@@ -313,9 +326,8 @@ def is_in_database(song):
 
 # Will update songs that are already present in the database (based on song_id), and add ones that are not yet present
 def put_songs(songs):
-    existing_songs = [song for song in songs if is_in_database(song)]
-    new_songs = [song for song in songs if not is_in_database(song)]
-
+    existing_songs = [song for song in songs if is_in_database(song.id)]
+    new_songs = [song for song in songs if not is_in_database(song.id)]
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -332,7 +344,53 @@ def put_songs(songs):
     add_songs(new_songs)
 
 
-def delete_songs():
+# ____ UTIL FUNCTIONS ____
+
+
+def get_connection():
+    return sqlite3.connect('music_data.db')
+
+
+# Always safe, since it doesn't commit to database and idempotent
+def fetch(query):
+    print(f"fetching {query}")
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+
+def column_exists(column):
+    return column in get_columns()
+
+
+def get_columns():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM music LIMIT 1")
+    return [desc[0] for desc in cursor.description]
+
+
+def delete_song(song_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM music WHERE song_id = '{song_id}'")
+    conn.commit()
+    conn.close()
+
+
+def delete_songs(song_id_list):
+    conn = get_connection()
+    cursor = conn.cursor()
+    for song_id in song_id_list:
+        cursor.execute(f"DELETE FROM music WHERE song_id = '{song_id}'")
+    conn.commit()
+    conn.close()
+
+
+def clear_music_table():
     # First archive database (just 2mb anyway)
     new_name = datetime.datetime.now().strftime('%Y-%m-%d--%H-%M-%S')
     print(new_name)
@@ -344,6 +402,15 @@ def delete_songs():
     conn.commit()
     conn.close()
     return True
+
+
+def is_empty():
+    conn = get_connection()
+    cursor = conn.cursor()
+    query = f"SELECT * FROM music"
+    cursor.execute(query)
+    row = cursor.fetchone()
+    return row is None
 
 if __name__ == "__main__":
     conn = get_connection()
