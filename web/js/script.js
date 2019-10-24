@@ -47,19 +47,21 @@ var app = new Vue({
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems, {accordion: false});
+
+    //Open first by default
+    instances[0].open(0);
+
   });
 
 function handleErrors(response) {
-if (!response.ok) {
-	try{
-		throw Error(res.text())
-	} catch(err) {
-       console.log('caught it!',err);
-    }
-
-    // throw Error(response.statusText);
-}
-return response;
+	if (!response.ok) {
+		try{
+			throw Error(res.text())
+		} catch(err) {
+	       console.log('caught it!',err);
+	    }
+	}
+	return response;
 }
 
 async function load_songs(url){

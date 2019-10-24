@@ -68,8 +68,8 @@
 					<ul class="song_list">
 						<li v-for="song in songs">
 			  				<p>
-							<strong><a :href="encodeURI(song.links.self.href)">{{ song.title }}</a></strong>
-							by <a :href="encodeURI(song.links.artist.href)">{{ song.artist_name }}</a>, released in {{ song.year }}
+							<strong><a :href="encodeURI('http://127.0.0.1:5000' + song.links.self.href)">{{ song.title }}</a></strong>
+							by <a :href="encodeURI('http://127.0.0.1:5000' + song.links.artist.href)">{{ song.artist_name }}</a>, released in {{ song.year }}
 			  				<span class="badge blue lighten-1 white-text">{{ formatted_time(song.duration) }}</span>
 			  				<span class="badge white-text" :style="{ 'background-color': hotness_color(song.hotttnesss) }">{{ song.hotttnesss }}</span>
 			  				</p>

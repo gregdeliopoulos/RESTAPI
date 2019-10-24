@@ -38,41 +38,6 @@
 					"response": []
 				},
 				{
-					"name": "http://127.0.0.1:5000/songs&year=1999",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"type": "text",
-								"value": "",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs?year=1999",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs"
-							],
-							"query": [
-								{
-									"key": "year",
-									"value": "1999"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "http://127.0.0.1:5000/songs&year=1999 csv",
 					"request": {
 						"method": "GET",
@@ -142,7 +107,7 @@
 					"response": []
 				},
 				{
-					"name": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+					"name": "http://127.0.0.1:5000/songs&artist_id=ARD7TVE1187B99BFB1&year=2008",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -154,7 +119,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+							"raw": "http://127.0.0.1:5000/songs?artist_id=ARD7TVE1187B99BFB1&year=2008",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -168,12 +133,12 @@
 							],
 							"query": [
 								{
-									"key": "year",
-									"value": "1999"
+									"key": "artist_id",
+									"value": "ARD7TVE1187B99BFB1"
 								},
 								{
-									"key": "order_by",
-									"value": "song_hotttnesss"
+									"key": "year",
+									"value": "2008"
 								}
 							]
 						}
@@ -208,171 +173,6 @@
 		{
 			"name": "/artists",
 			"item": [
-				{
-					"name": "http://127.0.0.1:5000/artists",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/artists application/json",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists"
-							]
-						},
-						"description": "application/json\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/artists text/csv",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "text/csv",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists"
-							]
-						},
-						"description": "application/json\n"
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/artists?name=key&genre=rock",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists?name=key&genre=rock",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists"
-							],
-							"query": [
-								{
-									"key": "name",
-									"value": "key"
-								},
-								{
-									"key": "genre",
-									"value": "rock"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists"
-							],
-							"query": [
-								{
-									"key": "order_by",
-									"value": "artist_hotttnesss"
-								},
-								{
-									"key": "sort",
-									"value": "desc"
-								}
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&genre=rock&count=2",
 					"request": {
@@ -416,26 +216,6 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:5000/artists/ARD7TVE1187B99BFB1",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5000/artists/ARD7TVE1187B99BFB1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"artists",
-								"ARD7TVE1187B99BFB1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "http://localhost:5000/artists/ARD7TVE1187B99BFB1 csv",
 					"request": {
 						"method": "GET",
@@ -467,43 +247,6 @@
 		{
 			"name": "/artists/:artist_id/songs",
 			"item": [
-				{
-					"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs&song_year=2007",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "",
-								"type": "text",
-								"value": "",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs?song_year=2007",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"artists",
-								"ARM0P6Z1187FB4D466",
-								"songs"
-							],
-							"query": [
-								{
-									"key": "song_year",
-									"value": "2007"
-								}
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs&genre=rock",
 					"request": {
@@ -671,142 +414,641 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "cud /songs/:song_id",
+			"name": "7 points",
 			"item": [
 				{
-					"name": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs",
-								"SOMZWCG12A8C13C480"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+					"name": "all artists in the dataset, optionally filtered by artist name and/or genre",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/artists",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs",
-								"SELFMADESONG"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n\t{\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SELFMADESONG\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+						{
+							"name": "http://127.0.0.1:5000/artists?name=key&genre=rock",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists?name=key&genre=rock",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "key"
+										},
+										{
+											"key": "genre",
+											"value": "rock"
+										}
+									]
+								}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs",
-								"SELFMADESONG"
-							]
+						{
+							"name": "http://127.0.0.1:5000/artists application/json",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									]
+								},
+								"description": "application/json\n"
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/artists text/csv",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/csv",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									]
+								},
+								"description": "application/json\n"
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"description": "all artists in the dataset, optionally filtered by artist name and/or genre",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs",
-								"SELFMADESONG"
-							]
+					"name": "all  available  information  about  a  specific  song  identified  by  its  uniquedataset ID",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SOMZWCG12A8C13C480"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"description": "all  available  information  about  a  specific  song  identified  by  its  uniquedataset ID",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"songs",
-								"SELFMADESONG"
-							]
+					"name": "all songs by a specific artist and/or in specific year",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs&year=2007",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs?year=2007",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists",
+										"ARM0P6Z1187FB4D466",
+										"songs"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2007"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists/ARM0P6Z1187FB4D466/songs",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists",
+										"ARM0P6Z1187FB4D466",
+										"songs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs&year=1999",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs?year=1999",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "1999"
+										}
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"description": "all songs by a specific artist and/or in specific year",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "an ordering of the artists ranked by their popularity (hotttnessindex)from more to less popular, with the possibility to subset this order, e.g.the top 50 artists‡",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									],
+									"query": [
+										{
+											"key": "order_by",
+											"value": "artist_hotttnesss"
+										},
+										{
+											"key": "sort",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc&count=20",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists?order_by=artist_hotttnesss&sort=desc&count=20",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists"
+									],
+									"query": [
+										{
+											"key": "order_by",
+											"value": "artist_hotttnesss"
+										},
+										{
+											"key": "sort",
+											"value": "desc"
+										},
+										{
+											"key": "count",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "an ordering of the artists ranked by their popularity (hotttnessindex)from more to less popular, with the possibility to subset this order, e.g.the top 50 artists‡",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "an ordering of songs in a specific year ranked and subsetted by popularityas above",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "1999"
+										},
+										{
+											"key": "order_by",
+											"value": "song_hotttnesss"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss&direction=asc&treshold=0.6",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs?year=1999&order_by=song_hotttnesss&direction=asc&treshold=0.6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "1999"
+										},
+										{
+											"key": "order_by",
+											"value": "song_hotttnesss"
+										},
+										{
+											"key": "direction",
+											"value": "asc"
+										},
+										{
+											"key": "treshold",
+											"value": "0.6"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "an ordering of songs in a specific year ranked and subsetted by popularityas above",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "descriptive statistics (mean, median, standard deviation) for the popular-ity of the songs for a particular artist with an optional filter by year.",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/artists/ARRH63Y1187FB47783",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/artists/ARRH63Y1187FB47783",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"artists",
+										"ARRH63Y1187FB47783"
+									]
+								},
+								"description": "http://127.0.0.1:5000/artists/ARRH63Y1187FB47783"
+							},
+							"response": []
+						}
+					],
+					"description": "descriptive statistics (mean, median, standard deviation) for the popular-ity of the songs for a particular artist with an optional filter by year.",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "cud /songs/:song_id",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SOMZWCG12A8C13C480",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SOMZWCG12A8C13C480"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SOMZWCG12A8C13C480\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SELFMADESONG"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n\t{\r\n        \"artist_id\": \"ARD7TVE1187B99BFB1\",\r\n        \"artist_mbtags\": 0.0,\r\n        \"artist_mbtags_count\": 0.0,\r\n        \"artist_name\": \"Casual\",\r\n        \"bars_confidence\": 0.643,\r\n        \"bars_start\": 0.58521,\r\n        \"beats_confidence\": 0.834,\r\n        \"beats_start\": 0.58521,\r\n        \"duration\": 218.93179,\r\n        \"end_of_fade_in\": 0.247,\r\n        \"hotttnesss\": 0.60211999,\r\n        \"id\": \"SELFMADESONG\",\r\n        \"key\": 1.0,\r\n        \"key_confidence\": 0.736,\r\n        \"links\": {\r\n            \"artist\": {\r\n                \"description\": \"By Casual\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"releases\": {\r\n                \"description\": \"Releases\",\r\n                \"href\": \"/artists/ARD7TVE1187B99BFB1/releases\",\r\n                \"method\": \"GET\"\r\n            },\r\n            \"self\": {\r\n                \"description\": \"View 0\",\r\n                \"href\": \"/songs/SOMZWCG12A8C13C480\",\r\n                \"method\": \"GET\"\r\n            }\r\n        },\r\n        \"loudness\": -11.197,\r\n        \"mode\": 0,\r\n        \"mode_confidence\": 0.636,\r\n        \"release_id\": 300848,\r\n        \"start_of_fade_out\": 218.932,\r\n        \"tatums_confidence\": 0.779,\r\n        \"tatums_start\": 0.28519,\r\n        \"tempo\": 92.198,\r\n        \"time_signature\": 4.0,\r\n        \"time_signature_confidence\": 0.778,\r\n        \"title\": 0,\r\n        \"year\": 0\r\n    }\r\n]"
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SELFMADESONG"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SELFMADESONG"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs/SELFMADESONG",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs/SELFMADESONG",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs",
+										"SELFMADESONG"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"protocolProfileBehavior": {}

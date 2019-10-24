@@ -212,10 +212,15 @@ class LinkedSong(Song):
         links["artist"]["href"] = "/artists/" + song.artist_id
         links["artist"]["method"] = "GET"
 
-        links["releases"] = {}
-        links["releases"]["description"] = "Releases"
-        links["releases"]["href"] = "/artists/" + song.artist_id + "/releases"
-        links["releases"]["method"] = "GET"
+        links["artist_releases"] = {}
+        links["artist_releases"]["description"] = "Artist releases"
+        links["artist_releases"]["href"] = "/artists/" + song.artist_id + "/releases"
+        links["artist_releases"]["method"] = "GET"
+
+        links["release"] = {}
+        links["release"]["description"] = "Release (View album)"
+        links["release"]["href"] = "/releases/" + str(song.release_id)
+        links["release"]["method"] = "GET"
 
         return links
 

@@ -39,7 +39,8 @@ def show_artists():
     linked_artists = list(map(db.LinkedArtist.from_db_row, rows))
 
     # Does this clean up?
-    linked_artists = list(set(linked_artists))
+    # linked_artists = list(set(linked_artists))
+    # It did, but messes with ordering
 
     if request.content_type in {"application/json", None}:
         return jsonify(linked_artists)
@@ -76,18 +77,24 @@ def show_artist(artist_id):
         meta_data = {}
     else:
         meta_data = {}
-        meta_data["mean_song_popularity"] = mean([song_row.song_hotttnesss for song_row in song_rows])
-        meta_data["median_song_popularity"] = median([song_row.song_hotttnesss for song_row in song_rows])
+        meta_data["mean_song_popularity"] = mean([song_row.song_hotttnesss for song_row in song_rows if song_row.song_hotttnesss is not None])
+        meta_data["median_song_popularity"] = median([song_row.song_hotttnesss for song_row in song_rows if song_row.song_hotttnesss is not None])
         if len(song_rows) > 1:
-            meta_data["stddev_song_popularity"] = stdev([song_row.song_hotttnesss for song_row in song_rows])
+            meta_data["stddev_song_popularity"] = stdev([song_row.song_hotttnesss for song_row in song_rows if song_row.song_hotttnesss is not None])
         else:
             meta_data["stddev_song_popularity"] = "undefined (need 2 entries)"
-        meta_data["artist_familiarity"] = mean([song_row.artist_familiarity for song_row in song_rows])
-        meta_data["artist_hotttnesss"] = mean([song_row.artist_hotttnesss for song_row in song_rows])
-        meta_data["artist_names_set"] = list(set([song_row.artist_name for song_row in song_rows]))
+        meta_data["artist_familiarity"] = mean([song_row.artist_familiarity for song_row in song_rows if song_row.artist_familiarity is not None])
+        meta_data["artist_hotttnesss"] = mean([song_row.artist_hotttnesss for song_row in song_rows if song_row.artist_hotttnesss is not None])
+
+        # First generate list of all name occurences, then find most common one, then take set of name occurences
+        meta_data["artist_names_set"] = [song_row.artist_name for song_row in song_rows]
         meta_data["artist_name"] = most_common(meta_data["artist_names_set"])
-        meta_data["artist_terms_set"] = list(set([song_row.artist_terms for song_row in song_rows]))
+        meta_data["artist_names_set"] = list(set(meta_data["artist_names_set"]))
+
+        # First generate list of all term occurences, then find most common one, then take set of term occurences
+        meta_data["artist_terms_set"] = [song_row.artist_terms for song_row in song_rows]
         meta_data["artist_terms"] = most_common(meta_data["artist_terms_set"])
+        meta_data["artist_terms_set"] = list(set(meta_data["artist_terms_set"]))
 
         # Generate links in a dirty way
         linked_artist = db.LinkedArtist.from_db_row(rows[0])
@@ -326,16 +333,18 @@ def handle_invalid_usage(error):
     return response
 
 
-def compute_query(query, filters, options=None):
+def compute_query(query, filters=None, options=None):
     computed = query
 
-    filters_string = " AND ".join(filters)
-    if filters_string != "":
-        computed = " WHERE ".join([query, filters_string])
+    if filters is not None:
+        filters_string = " AND ".join(filters)
+        if filters_string != "":
+            computed = " WHERE ".join([query, filters_string])
 
-    options_string = " ".join(options)
-    if options_string != "":
-        computed += f" {options_string}"
+    if options is not None:
+        options_string = " ".join(options)
+        if options_string != "":
+            computed += f" {options_string}"
 
     return computed
 
@@ -358,8 +367,8 @@ def parse_order_by_parameters(request, filters, options):
                 elif direction in {"dsc", "desc", "descending", "DSC", "DESC", "DESCENDING"}:
                     ordering += " DESC"
                 else:
-                    directions = {"asc", "ascending", "ASC", "ASCENDING", "dsc", "desc", "descending", "DSC", "DESC",
-                                  "DESCENDING"}
+                    directions = ["asc", "ascending", "ASC", "ASCENDING", "dsc", "desc", "descending", "DSC", "DESC",
+                                  "DESCENDING"]
                     raise InvalidUsage(
                         f"Undefined direction: '{direction}'. Check payload for viable directions",
                         status_code=422, payload={"directions": directions})
