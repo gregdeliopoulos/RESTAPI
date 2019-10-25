@@ -72,6 +72,8 @@
 							by <a :href="encodeURI('http://127.0.0.1:5000' + song.links.artist.href)">{{ song.artist_name }}</a>, released in {{ song.year }}
 			  				<span class="badge blue lighten-1 white-text">{{ formatted_time(song.duration) }}</span>
 			  				<span class="badge white-text" :style="{ 'background-color': hotness_color(song.hotttnesss) }">{{ song.hotttnesss }}</span>
+			  				<a class="waves-effect waves-light btn-flat btn-small" :data-artist_name="song.artist_name" :data-song_id="song.id" onclick="fetch_wiki(this)">Fetch wiki</a>
+			  				<p :id="song.id"></p>
 			  				</p>
 						</li>
 					</ul>
@@ -79,8 +81,11 @@
 			    </li>
 
 			    <li>
-			      <div class="collapsible-header"><i class="material-icons">Releases</i>Third</div>
-			      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+			      <div class="collapsible-header">
+			      	<a class="waves-effect waves-teal btn-flat">GET</a>
+			      	Artists
+			  	  </div>
+			      <div class="collapsible-body"><span>Not implemented</span></div>
 			    </li>
 
 			  </ul>

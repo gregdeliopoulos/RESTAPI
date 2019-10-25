@@ -64,6 +64,27 @@ function handleErrors(response) {
 	return response;
 }
 
+async function fetch_wiki(el){
+	console.log(el)
+	artist_name = el.dataset.artist_name;
+	song_id = el.dataset.song_id;
+
+	// Use openSearchAPI
+	url = encodeURI("https://en.wikipedia.org/w/api.php?action=opensearch&search=" + artist_name + "&limit=1&namespace=0&format=json");
+	console.log(url);
+	
+	const response = await fetch(url + "&origin=*");
+	const myJson = await response.json();
+	console.log(myJson);
+	if (!response.ok){
+		message = myJson.message + '<span class="badge red black-text">' + response.status + '</span>'; 
+		M.toast({html: message});
+	} else {
+		console.log(myJson);
+		document.getElementById(song_id).innerHTML = myJson[2][0];
+	}
+}
+
 async function load_songs(url){
 	console.log("loading songs from " + htmlDecode(url))
   	const response = await fetch(htmlDecode(url));
@@ -111,7 +132,7 @@ function load_songs_from_inputs(){
 
 	url = [url, param_string].join("?");
 
-	M.toast({html: "fetching " + url})
+	M.toast({html: "fetching " + url, displayLength:7000})
 
 	load_songs(url);
 }
