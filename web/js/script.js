@@ -77,11 +77,10 @@ async function fetch_wiki(el){
 	const myJson = await response.json();
 	console.log(myJson);
 	if (!response.ok){
-		message = myJson.message + '<span class="badge red black-text">' + response.status + '</span>'; 
-		M.toast({html: message});
+		console.log("Response is not ok")
 	} else {
 		console.log(myJson);
-		document.getElementById(song_id).innerHTML = myJson[2][0];
+		document.getElementById(song_id).innerHTML = myJson[2][0] + "<br><em>from<em> <a href='"+myJson[3][0]+"'>" + myJson[3][0] + "</a>";
 	}
 }
 
