@@ -90,6 +90,19 @@ class LinkedArtist(Artist):
 
         return links
 
+    def __iter__(self):
+        return iter(
+            [self.familiarity,
+             self.hotttnesss,
+             self.id,
+             self.latitude,
+             self.location,
+             self.longitude,
+             self.name,
+             self.similar,
+             self.terms,
+             self.terms_freq,
+             self.links])
 
 # Has uplink to artist_id
 @dataclass
@@ -223,6 +236,35 @@ class LinkedSong(Song):
         links["release"]["method"] = "GET"
 
         return links
+
+    def __iter__(self):
+        return iter([self.artist_id,
+                     self.artist_name,
+                     self.release_id,
+                     self.artist_mbtags,
+                     self.artist_mbtags_count,
+                     self.bars_confidence,
+                     self.bars_start,
+                     self.beats_confidence,
+                     self.beats_start,
+                     self.duration,
+                     self.end_of_fade_in,
+                     self.hotttnesss,
+                     self.id,
+                     self.key,
+                     self.key_confidence,
+                     self.loudness,
+                     self.mode,
+                     self.mode_confidence,
+                     self.start_of_fade_out,
+                     self.tatums_confidence,
+                     self.tatums_start,
+                     self.tempo,
+                     self.time_signature,
+                     self.time_signature_confidence,
+                     self.title,
+                     self.year,
+                     self.links])
 
 
 # @dataclass
