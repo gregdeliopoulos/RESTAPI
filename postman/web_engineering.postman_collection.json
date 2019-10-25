@@ -693,6 +693,88 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "all songs by artists in a specific genre (using terms as above),",
+					"item": [
+						{
+							"name": "http://127.0.0.1:5000/songs?genre=rock",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs?genre=rock",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "rock"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://127.0.0.1:5000/songs?genre=rock&count=25",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"type": "text",
+										"value": "",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:5000/songs?genre=rock&count=25",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"songs"
+									],
+									"query": [
+										{
+											"key": "genre",
+											"value": "rock"
+										},
+										{
+											"key": "count",
+											"value": "25"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "all songs by artists in a specific genre (using terms as above),",
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "an ordering of the artists ranked by their popularity (hotttnessindex)from more to less popular, with the possibility to subset this order, e.g.the top 50 artists‡",
 					"item": [
 						{
